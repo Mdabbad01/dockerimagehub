@@ -1,4 +1,4 @@
-name: CI/CD for dockeriz
+name: CI/CD for dockerized Flask App
 
 on:
   push:
@@ -53,10 +53,8 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/flask-app:latest
+          tags: abbad786/flask-app:latest
 
       - name: Image digest
-        run: |
-          echo "Digest: $DIGEST"
-        env:
-          DIGEST: ${{ steps.docker_build.outputs.digest }}
+        run: | 
+          echo "Digest: ${{ steps.docker_build.outputs.digest }}"
