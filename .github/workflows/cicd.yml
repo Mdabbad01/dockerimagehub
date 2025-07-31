@@ -9,7 +9,6 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -22,8 +21,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install flask
-          pip install pytest
+          pip install flask pytest
           pip install -r requirements.txt
 
       - name: Set PYTHONPATH
@@ -35,7 +33,6 @@ jobs:
   build-and-publish:
     needs: build-and-test
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -58,4 +55,4 @@ jobs:
           tags: ${{ secrets.DOCKER_USERNAME }}/flask-app:latest
 
       - name: Image digest
-        run: echo ${{ steps.build-and-publish.outputs.digest }}
+        run: echo "Digest: ${{ steps.build-and-publish.outputs.digest }}"
